@@ -1,0 +1,39 @@
+
+import pyowm
+from colorama import init
+from colorama import Fore, Back, Style
+init()
+print( Back.RED )
+print( Fore.CYAN )
+owm = pyowm.OWM('2f7558a0be804726c18cd2d5b26a2751', language = "ru")
+
+
+
+place = input("Город: ")
+# Search for current weather in London (Great Britain)
+observation = owm.weather_at_place(place)
+w = observation.get_weather()
+tempr = w.get_temperature('celsius')["temp"]  # {'temp_max': 10.5, 'temp': 9.7, 'temp_min': 9.0}
+c = w.get_detailed_status()
+#print(w)
+ 
+print("В городе " + place + " сейчас " + w.get_detailed_status())
+print("Текущая температура: " + str(tempr))                    
+ # <Weather - reference time=2013-12-18 09:20,
+
+                              # status=Clouds>
+
+if tempr < 10:
+ 	print("Оденься тепло")
+
+elif tempr < 20:
+	print("Сейчас холодно оденься потеплее")
+
+if tempr < 15:
+	print("Ну такое, можно сильно не утепляться")
+
+elif tempr < 22:
+	print("Температура норм ")
+else:
+	print("Жара просто ужас, одевайся легко и прихвати с собой попить ")
+input( )
